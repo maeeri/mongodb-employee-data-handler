@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 
+
 class MongoDbDataHandler:
     collection: str
     connectionString: str
@@ -38,3 +39,6 @@ class MongoDbDataHandler:
     def id_helper(self, item: dict) -> dict:
         item["_id"] = str(item["_id"])
         return item
+
+    def get_aggregate_result(self, pipeline: list):
+        return self.get_database().get_collection(self.collection).aggregate(pipeline).to_list()
