@@ -36,6 +36,10 @@ class MongoDbDataHandler:
             output.append(self.id_helper(item))
         return output
 
+
+    def get_collection_count(self):
+        return self.get_database().get_collection(self.collection).count_documents({})
+    
     def id_helper(self, item: dict) -> dict:
         item["_id"] = str(item["_id"])
         return item

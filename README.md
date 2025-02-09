@@ -9,3 +9,8 @@ POSTGRESQL_DB=<PostgreSQL database name>
 MONGO_DBNAME=<MongoDb database name>
 MONGO_CONNECTION=<MongoDb connection string>
 ´´´
+
+## Api documentation
+
+Run the api locally from the terminal (´´´fastapi dev´´´)
+Navigate to http://localhost:8000/docs

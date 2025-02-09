@@ -7,7 +7,6 @@ config = dotenv_values()
 mongoDbConnection = config["MONGO_CONNECTION"]
 mongoDbDatabase = config["MONGO_DBNAME"]
 mongo = EmployeeMongoDataHandler(mongoDbDatabase, mongoDbConnection)
-pgsql = PGDataHandler()
 
 app = FastAPI()
 router = APIRouter(prefix="/api/v1")
@@ -29,6 +28,22 @@ def delete_employees():
     try:
         mongo.empty_collection()
         return Response(content="{'delete': 'success'}", status_code=200)
+    except:
+        return Response(status_code=500)
+
+
+@router.post("/employees/migrate")
+def migrate_employees_from_pgsql_to_mongodb():
+    try:
+        if mongo.get_collection_count() > 0:
+            return Response(
+                content="{'info': 'The collection is not empty, no migration done'}"
+            )
+        else:
+            pgsql = PGDataHandler()
+            employees = pgsql.get_all_employees()
+            mongo.insert_collection(employees)
+            return Response(status_code=201)
     except:
         return Response(status_code=500)
 
