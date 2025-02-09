@@ -1,10 +1,31 @@
-from src.MDbContext import MongoDbDataHandler
+from src.Controllers.MDbContext import MongoDbDataHandler
 
 
 class EmployeeMongoDataHandler(MongoDbDataHandler):
 
     def __init__(self, dbName, connectionString):
         super().__init__(dbName, "employees", connectionString)
+
+    def get_salary_avg(self):
+        pipeline = [
+            {"$project": {"_id": 0, "jobTitle": 0, "yearsOfExperience": 0, "age": 0}},
+            {"$match": {"educationLevel": {"$not": {"$eq": "N/A"}}}},
+            {
+                "$group": {
+                    "_id": {"gender": "$gender", "educationLevel": "$educationLevel"},
+                    "avg_salary": {"$avg": "$salary"},
+                }
+            },
+            {
+                "$project": {
+                    "_id": 0,
+                    "gender": "$_id.gender",
+                    "educationLevel": "$_id.educationLevel",
+                    "avgSalary": "$avg_salary",
+                }
+            },
+        ]
+        return self.get_aggregate_result(pipeline)
 
     def get_age_avg(self):
         pipeline = [

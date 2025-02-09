@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from bson import ObjectId
 
 
 class MongoDbDataHandler:
@@ -30,16 +31,30 @@ class MongoDbDataHandler:
         else:
             db.create_collection(self.collection).insert_many(items)
 
+    def insert_one(self, item):
+        db = self.get_database()
+        coll = db.get_collection(self.collection)
+        if coll is not None:
+            return coll.insert_one(item).inserted_id
+        else:
+            return db.create_collection(self.collection).insert_one(item).inserted_id
+
     def get_all(self):
         output = []
         for item in self.get_database().get_collection(self.collection).find():
             output.append(self.id_helper(item))
         return output
 
+    def get_one(self, id: id):
+        return self.id_helper(
+            self.get_database()
+            .get_collection(self.collection)
+            .find_one({"_id": ObjectId(id)})
+        )
 
     def get_collection_count(self):
         return self.get_database().get_collection(self.collection).count_documents({})
-    
+
     def id_helper(self, item: dict) -> dict:
         item["_id"] = str(item["_id"])
         return item
