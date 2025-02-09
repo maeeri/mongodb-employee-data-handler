@@ -14,3 +14,5 @@ MONGO_CONNECTION=<MongoDb connection string>
 
 Run the api locally from the terminal (´´´fastapi dev´´´)
 Navigate to http://localhost:8000/docs
+
+Copy of opeapi.json is included in src directory

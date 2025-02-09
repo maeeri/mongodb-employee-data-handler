@@ -1,0 +1,370 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Health Check",
+        "operationId": "health_check__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/": {
+      "get": {
+        "summary": "Employees",
+        "operationId": "employees_api_v1_employees__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Employees",
+        "operationId": "delete_employees_api_v1_employees__delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/employee": {
+      "post": {
+        "summary": "Insert Employee",
+        "operationId": "insert_employee_api_v1_employees_employee_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestBodyEmployeeModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/employee/{id}": {
+      "get": {
+        "summary": "Employee By Id",
+        "operationId": "employee_by_id_api_v1_employees_employee__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/migrate": {
+      "post": {
+        "summary": "Migrate Employees From Pgsql To Mongodb",
+        "operationId": "migrate_employees_from_pgsql_to_mongodb_api_v1_employees_migrate_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/salaries": {
+      "get": {
+        "summary": "Average Salaries By Gender And Education Level",
+        "operationId": "average_salaries_by_gender_and_education_level_api_v1_employees_salaries_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/experience": {
+      "get": {
+        "summary": "Max Experience By Gender And Job Title",
+        "operationId": "max_experience_by_gender_and_job_title_api_v1_employees_experience_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/count": {
+      "get": {
+        "summary": "Employee Count By Job Title And Education",
+        "operationId": "employee_count_by_job_title_and_education_api_v1_employees_count_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/ageavg": {
+      "get": {
+        "summary": "Average Age By Gender And Education",
+        "operationId": "average_age_by_gender_and_education_api_v1_employees_ageavg_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/salarysum": {
+      "get": {
+        "summary": "Salaries By Gender And Job Title",
+        "operationId": "salaries_by_gender_and_job_title_api_v1_employees_salarysum_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/mastercount": {
+      "get": {
+        "summary": "Employee Count Masters Degree By Title Gte 15",
+        "operationId": "employee_count_masters_degree_by_title_gte_15_api_v1_employees_mastercount_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/maxavgsalary": {
+      "get": {
+        "summary": "Highest Avg Salary By Gender",
+        "operationId": "highest_avg_salary_by_gender_api_v1_employees_maxavgsalary_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "RequestBodyEmployeeModel": {
+        "properties": {
+          "age": {
+            "type": "integer",
+            "title": "Age"
+          },
+          "gender": {
+            "type": "string",
+            "title": "Gender"
+          },
+          "educationLevel": {
+            "type": "string",
+            "title": "Educationlevel"
+          },
+          "jobTitle": {
+            "type": "string",
+            "title": "Jobtitle"
+          },
+          "yearsOfExperience": {
+            "type": "number",
+            "title": "Yearsofexperience"
+          },
+          "salary": {
+            "type": "number",
+            "title": "Salary"
+          }
+        },
+        "type": "object",
+        "required": [
+          "age",
+          "gender",
+          "educationLevel",
+          "jobTitle",
+          "yearsOfExperience",
+          "salary"
+        ],
+        "title": "RequestBodyEmployeeModel"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
