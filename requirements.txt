@@ -2,3 +2,4 @@ python-dotenv
 pydantic
 contextlib
 psycopg2
+pymongo

@@ -3,8 +3,6 @@ import contextlib
 import dotenv
 
 config = dotenv.dotenv_values()
-print(config)
-
 
 class PGDataHandler:
 
