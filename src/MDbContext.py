@@ -1,41 +1,40 @@
 from pymongo import MongoClient
-from dotenv import dotenv_values
-from bson.objectid import ObjectId
-
-config = dotenv_values()
-
 
 class MongoDbDataHandler:
+    collection: str
+    connectionString: str
+    databaseName: str
+
+    def __init__(self, dbName, collectionName, connectionString):
+        self.databaseName = dbName
+        self.collection = collectionName
+        self.connectionString = connectionString
+
     def get_database(self):
-        CONNECTION_STRING = config["MONGO_CONNECTION"]
-        DBNAME = config["MONGO_DBNAME"]
-        client = MongoClient(CONNECTION_STRING)
-        return client[DBNAME]
+        client = MongoClient(self.connectionString)
+        return client[self.databaseName]
 
-    def clear_collection(self, collection: str):
-        self.get_database().drop_collection(collection)
+    def drop_collection(self):
+        self.get_database().drop_collection(self.collection)
 
-    def insert_collection(self, collection: str, items):
+    def empty_collection(self):
+        self.get_database().get_collection(self.collection).delete_many({})
+        return self.get_all()
+
+    def insert_collection(self, items):
         db = self.get_database()
-        coll = db.get_collection(collection)
+        coll = db.get_collection(self.collection)
         if coll is not None:
             coll.insert_many(items)
         else:
-            db.create_collection(collection).insert_many(items)
+            db.create_collection(self.collection).insert_many(items)
 
-    def get_all(self, collection: str):
+    def get_all(self):
         output = []
-        for employee in self.get_database().get_collection(collection).find():
-            output.append(self.employee_id_helper(employee))
+        for item in self.get_database().get_collection(self.collection).find():
+            output.append(self.id_helper(item))
         return output
 
-    def employee_id_helper(self, employee) -> dict:
-        return {
-            "id": str(employee["_id"]),
-            "gender": employee["gender"],
-            "jobTitle": employee["jobTitle"],
-            "educationLevel": employee["educationLevel"],
-            "salary": employee["salary"],
-            "age": employee["age"],
-            "yearsOfExperience": employee["yearsOfExperience"],
-        }
+    def id_helper(self, item: dict) -> dict:
+        item["_id"] = str(item["_id"])
+        return item
