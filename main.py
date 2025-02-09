@@ -17,6 +17,22 @@ router = APIRouter(prefix="/api/v1")
 async def health_check():
     return Response(content="{'status': 'success'}", status_code=200)
 
+
+@router.get("/employees")
+def employees():
+    res = mongo.get_all()
+    return res
+
+
+@router.delete("/employees")
+def delete_employees():
+    try:
+        mongo.empty_collection()
+        return Response(content="{'delete': 'success'}", status_code=200)
+    except:
+        return Response(status_code=500)
+
+
 app.include_router(router)
 
 # if __name__ == "__main__":
