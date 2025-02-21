@@ -1,3 +1,6 @@
+This project assumes the PostgreSQL database to be the same as here: https://github.com/maeeri/postgresql-employee-data-handler
+
+
 ## Contents of the .env file
 
 ```
